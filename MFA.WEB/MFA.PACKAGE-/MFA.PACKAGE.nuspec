@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>DCFS</authors>
+	  <description>This is the MFA package. It is used to assist the migration of SSON. This package is for asp.net framework >= 4.8.0.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+  </metadata>
+</package>
