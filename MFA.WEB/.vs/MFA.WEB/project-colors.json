@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "cd8e53d2-b177-494b-ae08-1ceef98e43d7": {
+      "ProjectGuid": "cd8e53d2-b177-494b-ae08-1ceef98e43d7",
+      "DisplayName": "MFA.WEB",
+      "ColorIndex": 0
+    },
+    "be3b70bf-d153-49bf-bc58-38b2692c9548": {
+      "ProjectGuid": "be3b70bf-d153-49bf-bc58-38b2692c9548",
+      "DisplayName": "MFA.PACKAGE",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
