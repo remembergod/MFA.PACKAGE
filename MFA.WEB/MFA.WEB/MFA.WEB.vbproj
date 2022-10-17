@@ -46,8 +46,8 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DCFS.MFA.PACKAGE, Version=4.8.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DCFS.MFA.PACKAGE.4.8.0.4\lib\net48\DCFS.MFA.PACKAGE.dll</HintPath>
+    <Reference Include="DCFS.MFA.PACKAGE, Version=4.8.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DCFS.MFA.PACKAGE.4.8.0.5\lib\net48\DCFS.MFA.PACKAGE.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>

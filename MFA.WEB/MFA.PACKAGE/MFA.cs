@@ -33,7 +33,7 @@ namespace LAC.DCFS.MFA.PACKAGE
 
         public async Task<TokenModel> GetAuthResponse(AuthorizationModel authorizationModel)
         {
-            var tokenModel = new TokenModel();
+
             var client = new HttpClient();
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("cache-control", "no-cache");
@@ -51,16 +51,24 @@ namespace LAC.DCFS.MFA.PACKAGE
 
             try
             {
+                
                 var responseMessage = await client.PostAsync("https://login.microsoftonline.com/" + authorizationModel.tenant + "/oauth2/token", new FormUrlEncodedContent(parameter));
-
-                tokenModel.IsSuccessStatusCode = responseMessage.IsSuccessStatusCode;
+                var tokenModel = new TokenModel
+                {
+                    IsSuccessStatusCode = responseMessage.IsSuccessStatusCode,
+                    error_message = responseMessage.ReasonPhrase
+                };
 
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     var jsonContent = await responseMessage.Content.ReadAsStringAsync();
                     tokenModel = JsonConvert.DeserializeObject<TokenModel>(jsonContent);
-                    tokenModel.IsSuccessStatusCode = responseMessage.IsSuccessStatusCode;
-                    return tokenModel;
+
+                    if (tokenModel != null)
+                    {
+                        tokenModel.IsSuccessStatusCode = responseMessage.IsSuccessStatusCode;
+                        return tokenModel;
+                    }
                 }
 
                 return tokenModel;
@@ -68,9 +76,14 @@ namespace LAC.DCFS.MFA.PACKAGE
             }
             catch (Exception e)
             {
-                tokenModel.IsSuccessStatusCode = false;
-                tokenModel.error_message = e.Message;
+                var tokenModel = new TokenModel
+                {
+                    IsSuccessStatusCode = false,
+                    error_message = e.Message
+                };
+
                 return tokenModel;
+
             }
 
         }
@@ -115,24 +128,33 @@ namespace LAC.DCFS.MFA.PACKAGE
             try
             {
                 var users = await client.GetAsync(uri);
-                var userModel = new UserModel();
-                userModel.IsSuccessStatusCode = users.IsSuccessStatusCode;
+                var userModel = new UserModel
+                {
+                    IsSuccessStatusCode = users.IsSuccessStatusCode,
+                    errorMessage = users.ReasonPhrase
+                };
 
                 if (users.IsSuccessStatusCode)
                 {
                     var jsonContent = await users.Content.ReadAsStringAsync();
                     userModel = JsonConvert.DeserializeObject<UserModel>(jsonContent);
-                    userModel.IsSuccessStatusCode = users.IsSuccessStatusCode;
-                    return userModel;
+
+                    if (userModel != null)
+                    {
+                        userModel.IsSuccessStatusCode = users.IsSuccessStatusCode;
+                        return userModel;
+                    }
                 }
 
                 return userModel;
             }
             catch (Exception e)
             {
-                var userModel = new UserModel();
-                userModel.IsSuccessStatusCode = false;
-                userModel.errorMessage = e.Message;
+                var userModel = new UserModel
+                {
+                    IsSuccessStatusCode = false,
+                    errorMessage = e.Message
+                };
                 return userModel;
             }
 
