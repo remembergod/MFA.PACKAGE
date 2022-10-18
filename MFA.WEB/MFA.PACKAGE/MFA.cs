@@ -19,8 +19,25 @@ namespace LAC.DCFS.MFA.PACKAGE
                                      "&response_mode=" + authorizationModel.response_mode +
                                      "&scope=" + authorizationModel.scope +
                                      "&state=" + authorizationModel.state +
+                                     "&login_hint=" + authorizationModel.login_hint +
                                      "&prompt=login"
                                      ;
+            return oauth2SignInUrl;
+        }
+
+        public string GetOAuthSignInUrlWithUserConSent(AuthorizationModel authorizationModel)
+        {
+            var oauth2SignInUrl = "https://login.microsoftonline.com/" + authorizationModel.tenant +
+                                  "/oauth2/v2.0/authorize?" +
+                                  "client_id=" + authorizationModel.client_id +
+                                  "&response_type=" + authorizationModel.response_type +
+                                  "&redirect_uri=" + authorizationModel.redirect_uri +
+                                  "&response_mode=" + authorizationModel.response_mode +
+                                  "&scope=" + authorizationModel.scope +
+                                  "&state=" + authorizationModel.state +
+                                  "&login_hint=" + authorizationModel.login_hint +
+                                  "&prompt=consent"
+                ;
             return oauth2SignInUrl;
         }
 
@@ -194,19 +211,6 @@ namespace LAC.DCFS.MFA.PACKAGE
 
     }
 
-    public class AuthorizationModel_
-    {
-        public string tenant { get; set; }
-        public string client_id { get; set; }
-        public string scope { get; set; }
-        public string code { get; set; }
-        public string redirect_uri { get; set; }
-        public string grant_type { get; set; }
-        public string code_verifier { get; set; }
-        public string client_secret { get; set; }
-
-
-    }
 
     public class TokenModel
     {
