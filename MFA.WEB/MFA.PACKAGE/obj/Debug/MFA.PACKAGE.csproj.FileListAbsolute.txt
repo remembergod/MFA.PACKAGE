@@ -35,4 +35,3 @@ D:\Document\Github\MFA.PACKAGE\MFA.WEB\MFA.PACKAGE\bin\Debug\System.ValueTuple.x
 D:\Document\Github\MFA.PACKAGE\MFA.WEB\MFA.PACKAGE\obj\Debug\MFA.PACKAGE.csproj.CopyComplete
 D:\Document\Github\MFA.PACKAGE\MFA.WEB\MFA.PACKAGE\obj\Debug\DCFS.MFA.PACKAGE.dll
 D:\Document\Github\MFA.PACKAGE\MFA.WEB\MFA.PACKAGE\obj\Debug\DCFS.MFA.PACKAGE.pdb
-D:\Document\Github\MFA.PACKAGE\MFA.WEB\MFA.PACKAGE\obj\Debug\MFA.PACKAGE.csproj.AssemblyReference.cache

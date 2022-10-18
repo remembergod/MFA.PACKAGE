@@ -109,43 +109,56 @@ namespace LAC.DCFS.MFA.PACKAGE
 
         public async Task<UserModel> GetLoginEmployeeProfile(string accessToken)
         {
-
-            var client = new HttpClient();
-            var handler = new JwtSecurityTokenHandler();
-            var jwtSecurityToken = handler.ReadJwtToken(accessToken);
-            string audValue = null;
             string uri;
 
-            foreach (var claim in jwtSecurityToken.Claims)
+            try
             {
-                if (claim.Type == "aud") audValue = claim.Value;
-            }
+                var handler = new JwtSecurityTokenHandler();
+                var jwtSecurityToken = handler.ReadJwtToken(accessToken);
+                string audValue = null;
+                
+                foreach (var claim in jwtSecurityToken.Claims)
+                {
+                    if (claim.Type == "aud") audValue = claim.Value;
+                }
 
-            switch (audValue ?? "")
-            {
-                case "00000002-0000-0000-c000-000000000000":
+                switch (audValue ?? "")
+                {
+                    case "00000002-0000-0000-c000-000000000000":
                     {
                         uri = "https://graph.windows.net/me?api-version=1.6";
                         break;
                     }
-                case "00000003-0000-0000-c000-000000000000":
+                    case "00000003-0000-0000-c000-000000000000":
                     {
                         uri = "https://graph.microsoft.com/beta/me/";
                         break;
                     }
-                case "https://graph.microsoft.com":
-                {
-                    uri = "https://graph.microsoft.com/beta/me/";
-                    break;
-                }
+                    case "https://graph.microsoft.com":
+                    {
+                        uri = "https://graph.microsoft.com/beta/me/";
+                        break;
+                    }
 
-                default:
+                    default:
                     {
                         uri = "https://graph.microsoft.com/beta/me/";
                         break;
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                var userModel = new UserModel
+                {
+                    IsSuccessStatusCode = false,
+                    errorMessage = e.Message
+                };
+                return userModel;
             }
 
+
+            var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
 
