@@ -12,13 +12,15 @@ namespace LAC.DCFS.MFA.PACKAGE
         public string GetOAuthSignInUrl(AuthorizationModel authorizationModel)
         {
             var oauth2SignInUrl = "https://login.microsoftonline.com/" + authorizationModel.tenant +
-                                     "/oauth2/authorize?" +
+                                     "/oauth2/v2.0/authorize?" +
                                      "client_id=" + authorizationModel.client_id +
                                      "&response_type=" + authorizationModel.response_type +
                                      "&redirect_uri=" + authorizationModel.redirect_uri +
                                      "&response_mode=" + authorizationModel.response_mode +
                                      "&scope=" + authorizationModel.scope +
-                                     "&state=" + authorizationModel.state;
+                                     "&state=" + authorizationModel.state +
+                                     "&prompt=login"
+                                     ;
             return oauth2SignInUrl;
         }
 
@@ -52,7 +54,7 @@ namespace LAC.DCFS.MFA.PACKAGE
             try
             {
                 
-                var responseMessage = await client.PostAsync("https://login.microsoftonline.com/" + authorizationModel.tenant + "/oauth2/token", new FormUrlEncodedContent(parameter));
+                var responseMessage = await client.PostAsync("https://login.microsoftonline.com/" + authorizationModel.tenant + "/oauth2/v2.0/token", new FormUrlEncodedContent(parameter));
                 var tokenModel = new TokenModel
                 {
                     IsSuccessStatusCode = responseMessage.IsSuccessStatusCode,
@@ -114,6 +116,11 @@ namespace LAC.DCFS.MFA.PACKAGE
                         uri = "https://graph.microsoft.com/beta/me/";
                         break;
                     }
+                case "https://graph.microsoft.com":
+                {
+                    uri = "https://graph.microsoft.com/beta/me/";
+                    break;
+                }
 
                 default:
                     {
